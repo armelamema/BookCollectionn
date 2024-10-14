@@ -2,13 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BookCollectionn.Models
 {
-    public class Genre
+    public class GenreController : Controller
     {
-        public int GenreID { get; set; }
-        public string Name { get; set; }
-        public virtual ICollection<BookGenre> BookGenres { get; set; }
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+
+        // GET: Genre
+        public ActionResult Index()
+        {
+            var genres = _context.Genres.ToList();
+            return View(genres);
+        }
+
+        // GET: Genre/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Genre/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Genre genre)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Genres.Add(genre);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(genre);
+        }
     }
 }

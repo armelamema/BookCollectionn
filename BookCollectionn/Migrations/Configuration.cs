@@ -6,7 +6,7 @@ namespace BookCollectionn.Migrations
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+    using BookCollectionn.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<BookCollectionn.Models.ApplicationDbContext>
     {
@@ -17,23 +17,21 @@ namespace BookCollectionn.Migrations
 
         protected override void Seed(BookCollectionn.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            // Seeding initial data for Authors
+            context.Authors.AddOrUpdate(a => a.Name,
+                new Author { Name = "J.K. Rowling" },
+                new Author { Name = "George R.R. Martin" }
+            );
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            // Seeding initial data for Genres
+            context.Genres.AddOrUpdate(g => g.Name,
+                new Genre { Name = "Fantasy" },
+                new Genre { Name = "Science Fiction" }
+            );
+
+            // Commit the changes to the database
+            context.SaveChanges();
         }
     }
-}
-protected override void Seed(BookCollectionn.Models.ApplicationDbContext context)
-{
-    context.Authors.AddOrUpdate(a => a.Name,
-        new Author { Name = "J.K. Rowling" },
-        new Author { Name = "George R.R. Martin" });
-
-    context.Genres.AddOrUpdate(g => g.Name,
-        new Genre { Name = "Fantasy" },
-        new Genre { Name = "Science Fiction" });
-
-    context.SaveChanges();
 }
 

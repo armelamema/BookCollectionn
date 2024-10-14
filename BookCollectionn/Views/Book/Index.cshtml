@@ -1,9 +1,8 @@
-﻿@model IEnumerable<BookCollectionn.Models.Book>
-
-@{
-    ViewData["Title"] = "Books List";
+﻿@{ViewData["Title"] = "Home Page";
 }
 
+<h2>Welcome to the Book Collection!</h2>
+<p>This is the home page for your book collection management application.</p>
 <h2>Books List</h2>
 
 <p>
@@ -24,13 +23,21 @@
         {
             <tr>
                 <td>@book.Title</td>
-                <td>@book.Author</td>
-                <td>@book.Genre</td>
+                <td>@book.Author.Name</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@book.BookID" class="btn btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@book.BookID" class="btn btn-danger">Delete</a>
+                    @foreach (var genre in book.BookGenres)
+                    {
+                        @genre.Genre.Name<br />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@book.BookID"
+                       class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@book.BookID"
+                       class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+

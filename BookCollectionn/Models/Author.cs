@@ -3,16 +3,39 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BookCollectionn.Models
 {
-    public class Author
+    public class AuthorController : Controller
     {
-        public int AuthorID { get; set; }
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
-        [Required(ErrorMessage = "Name is required.")]
-        public string Name { get; set; }
+        // GET: Author
+        public ActionResult Index()
+        {
+            var authors = _context.Authors.ToList();
+            return View(authors);
+        }
 
-        public virtual ICollection<Book> Books { get; set; }
+        // GET: Author/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Author/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Author author)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Authors.Add(author);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(author);
+        }
     }
 }

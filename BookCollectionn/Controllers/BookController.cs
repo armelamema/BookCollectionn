@@ -12,6 +12,12 @@ namespace BookCollectionn.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        // Parameterless constructor
+        public BookController() : this(new ApplicationDbContext())
+        {
+        }
+
+        // Constructor with dependency injection
         public BookController(ApplicationDbContext context)
         {
             _context = context;

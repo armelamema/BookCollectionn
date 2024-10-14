@@ -4,26 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BookCollectionn.Controllers
+namespace BookCollection.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            ViewData["Title"] = "Home Page";
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewData["Title"] = "About Us";
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewData["Title"] = "Contact";
             return View();
         }
     }

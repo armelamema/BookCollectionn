@@ -27,10 +27,28 @@ namespace BookCollectionn.Models
                 .HasForeignKey(bg => bg.BookID);
 
             // Configure relationships between BookGenre and Genre
-            modelBuilder.Entity<BookGenre>()
+            _ = modelBuilder.Entity<BookGenre>()
                 .HasRequired(bg => bg.Genre)
                 .WithMany(g => g.BookGenres)
                 .HasForeignKey(bg => bg.GenreID);
         }
+    }
+
+    public class Book
+    {
+        public ICollection<BookGenre> BookGenres { get; internal set; }
+        public int BookID { get; internal set; }
+        public object AuthorID { get; internal set; }
+        public object Author { get; internal set; }
+    }
+
+    public class Genre
+    {
+        public string Name { get; internal set; }
+    }
+
+    public class Author
+    {
+        public object Name { get; internal set; }
     }
 }
