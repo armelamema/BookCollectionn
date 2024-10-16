@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace BookCollectionn
+namespace BookCollection
 {
     public class RouteConfig
     {
@@ -17,7 +17,7 @@ namespace BookCollectionn
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "BookCollectionn.Controllers" } // Specify the correct namespace for your controllers
+                namespaces: new[] { "BookCollection.Controllers" } // Specify the correct namespace for your controllers
             );
         }
     }
