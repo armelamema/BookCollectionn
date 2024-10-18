@@ -1,15 +1,10 @@
-﻿using BookCollectionn.Controllers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Data.Entity;
+using System.Linq;
+using BookCollectionn.Models;
+using System.Collections.Generic;  
 
-
-
-namespace BookCollectionn.Models
+namespace BookCollectionn.Controllers  
 {
     public class BookController : Controller
     {
@@ -18,8 +13,7 @@ namespace BookCollectionn.Models
         // GET: Book
         public ActionResult Index()
         {
-            var books = _context.Books.Include(b => b.Author).ToList();
-            return View(books);
+            return View(_context.Books.Include("Author").ToList());
         }
 
         // GET: Book/Create
@@ -58,5 +52,20 @@ namespace BookCollectionn.Models
             return View(book);
         }
     }
-}
 
+    public class ApplicationDbContext : DbContext
+    {
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Book> Books { get; set; }  
+        public DbSet<BookGenre> BookGenres { get; set; }
+    }
+    public class Book
+    {
+        public int BookID { get; set; }
+        public string Title { get; set; }
+        public int AuthorID { get; set; }
+        public virtual Author Author { get; set; }
+        public virtual ICollection<BookGenre> BookGenres { get; set; }
+    }
+}

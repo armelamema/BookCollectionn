@@ -1,20 +1,22 @@
-﻿using System.Web;
+﻿using System.Diagnostics;
 using System.Web.Optimization;
 
 namespace BookCollection
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
+        private const string VirtualPath = "~/Scripts/bootstrap.js";
+
         public static void RegisterBundles(BundleCollection bundles)
         {
-            // jQuery bundle
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            // Bootstrap bundle
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.bundle.min.js"));
+                   VirtualPath));
+
+            // Log the bundle registration
+            Debug.WriteLine("Bootstrap bundle registered with path: " + VirtualPath);
 
             // Modernizr
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

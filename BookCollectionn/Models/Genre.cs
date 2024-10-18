@@ -1,40 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookCollectionn.Models
 {
-    public class GenreController : Controller
+    public class Genre
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        [Key] // This marks GenreId as the primary key
+        public int GenreId { get; set; } // Unique ID for each genre
 
-        // GET: Genre
-        public ActionResult Index()
-        {
-            var genres = _context.Genres.ToList();
-            return View(genres);
-        }
+        [Required(ErrorMessage = "Genre name is required.")]
+        [StringLength(100, ErrorMessage = "Genre name cannot exceed 100 characters.")]
+        public string Name { get; set; } // Name of the genre
 
-        // GET: Genre/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Genre/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Genre genre)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Genres.Add(genre);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(genre);
-        }
+        // This creates a list of books that belong to this genre
+        public ICollection<BookGenre> BookGenres { get; set; } = new List<BookGenre>();
     }
 }

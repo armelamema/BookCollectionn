@@ -1,33 +1,147 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Book Collection Home Page";
 }
 
+<style>
+    body {
+        background-color: #f9f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    main {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 2.75rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .lead {
+        font-size: 1.2rem;
+        color: #666;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        margin-top: 1rem;
+    }
+
+    .section-title {
+        border-bottom: 3px solid #007bff;
+        padding-bottom: 0.5rem;
+        color: #007bff;
+        font-size: 1.5rem;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 -1rem;
+        gap: 1.5rem;
+    }
+
+    .col-md-4 {
+        flex: 1;
+        padding: 0 1rem;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .card p {
+            color: #555;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+    .btn-outline-dark {
+        border-color: #007bff;
+        color: #007bff;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+    footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 1rem 0;
+        background-color: #f1f1f1;
+        color: #666;
+        border-top: 1px solid #e0e0e0;
+    }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+</style>
+
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+    <section class="row" aria-labelledby="title">
+        <h1 id="title">Welcome to Your Book Collection</h1>
+        <p class="lead">Manage and explore your personal library with ease.</p>
+        <p><a href="@Url.Action("Create", "Book")" class="btn btn-primary btn-lg">Add New Book &raquo;</a></p>
     </section>
 
     <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <section class="col-md-4" aria-labelledby="viewBooksTitle">
+            <div class="card">
+                <h2 class="section-title" id="viewBooksTitle">View Your Books</h2>
+                <p>Browse through your collection to find and manage your favorite titles.</p>
+                <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "Book")">View Books &raquo;</a></p>
+            </div>
         </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+        <section class="col-md-4" aria-labelledby="organizeBooksTitle">
+            <div class="card">
+                <h2 class="section-title" id="organizeBooksTitle">Organize Your Library</h2>
+                <p>Keep your collection organized with genres and authors for easy access.</p>
+                <p><a class="btn btn-outline-dark" href="@Url.Action("Create", "Genre")">Manage Genres &raquo;</a></p>
+            </div>
         </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+        <section class="col-md-4" aria-labelledby="deleteBooksTitle">
+            <div class="card">
+                <h2 class="section-title" id="deleteBooksTitle">Remove Books</h2>
+                <p>Get rid of books you no longer want in your collection.</p>
+                <p><a class="btn btn-outline-dark" href="@Url.Action("Delete", "Book")">Remove Books &raquo;</a></p>
+            </div>
         </section>
     </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Book Collection. All rights reserved.</p>
+    </footer>
 </main>
