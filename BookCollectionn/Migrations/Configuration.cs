@@ -1,4 +1,4 @@
-﻿using BookCollection.Models;
+﻿
 using BookCollectionn.Models;
 using System.Data.Entity.Migrations;
 
@@ -25,7 +25,7 @@ namespace BookCollectionn.Migrations
                 new Genre { Name = "Science Fiction" }
             );
 
-            // Commit the changes to the database
+          
             context.SaveChanges();
         }
     }

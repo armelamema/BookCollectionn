@@ -20,32 +20,33 @@ namespace BookCollection.Controllers
         // GET: Book/Index
         public ActionResult Index()
         {
-            var books = _context.Books; 
+            var books = _context.Books;
             if (books == null)
             {
-                
+
                 return View(new List<Book>());
             }
-            var bookList = books.ToList(); 
+            var bookList = books.ToList();
             return View(bookList);
         }
 
-       
 
-    public class BookContext : DbContext 
-    {
-        public BookContext() : base("YourConnectionStringName")
+
+        public class BookContext : DbContext
         {
+            public BookContext() : base("YourConnectionStringName")
+            {
+            }
+
+            public DbSet<Book> Books { get; set; }
         }
 
-        public DbSet<Book> Books { get; set; } 
-    }
+        public class Book
+        {
+            public int BookID { get; set; }
+            public string Title { get; set; }
+            public int AuthorID { get; set; }
 
-    public class Book
-    {
-        public int BookID { get; set; }
-        public string Title { get; set; } 
-        public int AuthorID { get; set; }
-        
+        }
     }
-}
+    }

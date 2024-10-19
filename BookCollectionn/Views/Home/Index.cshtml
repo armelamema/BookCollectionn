@@ -1,147 +1,204 @@
-﻿@{
-    ViewBag.Title = "Book Collection Home Page";
-}
-
-<style>
-    body {
-        background-color: #f9f9f9;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    main {
-        padding: 2rem;
-        max-width: 1200px;
-        margin: auto;
-    }
-
-    h1 {
-        font-size: 2.75rem;
-        margin-bottom: 1.5rem;
-        color: #333;
-        text-align: center;
-        font-weight: 600;
-    }
-
-    .lead {
-        font-size: 1.2rem;
-        color: #666;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .btn {
-        margin-top: 1rem;
-    }
-
-    .section-title {
-        border-bottom: 3px solid #007bff;
-        padding-bottom: 0.5rem;
-        color: #007bff;
-        font-size: 1.5rem;
-    }
-
-    .row {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 -1rem;
-        gap: 1.5rem;
-    }
-
-    .col-md-4 {
-        flex: 1;
-        padding: 0 1rem;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-        margin-bottom: 2rem;
-    }
-
-    .card {
-        background: white;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 1.5rem;
-        text-align: center;
-        transition: box-shadow 0.3s ease;
-    }
-
-        .card:hover {
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Collection</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .card p {
-            color: #555;
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .card a {
-            text-decoration: none;
-            color: #007bff;
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+            font-weight: 700;
         }
 
-    .btn-outline-dark {
-        border-color: #007bff;
-        color: #007bff;
-    }
-
-        .btn-outline-dark:hover {
-            background-color: #007bff;
-            color: white;
-            transition: background-color 0.3s ease;
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-    footer {
-        text-align: center;
-        margin-top: 3rem;
-        padding: 1rem 0;
-        background-color: #f1f1f1;
-        color: #666;
-        border-top: 1px solid #e0e0e0;
-    }
-
-        footer a {
-            color: #007bff;
-            text-decoration: none;
+        .col-md-4 {
+            flex: 1 1 calc(30% - 1rem);
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: transform 0.2s;
         }
 
-            footer a:hover {
-                text-decoration: underline;
+            .col-md-4:hover {
+                transform: scale(1.02);
             }
-</style>
 
-<main>
-    <section class="row" aria-labelledby="title">
-        <h1 id="title">Welcome to Your Book Collection</h1>
-        <p class="lead">Manage and explore your personal library with ease.</p>
-        <p><a href="@Url.Action("Create", "Book")" class="btn btn-primary btn-lg">Add New Book &raquo;</a></p>
-    </section>
+            .col-md-4 h2 {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: #444;
+                margin-bottom: 1rem;
+            }
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="viewBooksTitle">
-            <div class="card">
-                <h2 class="section-title" id="viewBooksTitle">View Your Books</h2>
-                <p>Browse through your collection to find and manage your favorite titles.</p>
-                <p><a class="btn btn-outline-dark" href="@Url.Action("Index", "Book")">View Books &raquo;</a></p>
-            </div>
-        </section>
+        .form-control {
+            margin: 0.5rem 0;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
 
-        <section class="col-md-4" aria-labelledby="organizeBooksTitle">
-            <div class="card">
-                <h2 class="section-title" id="organizeBooksTitle">Organize Your Library</h2>
-                <p>Keep your collection organized with genres and authors for easy access.</p>
-                <p><a class="btn btn-outline-dark" href="@Url.Action("Create", "Genre")">Manage Genres &raquo;</a></p>
-            </div>
-        </section>
+        .btn {
+            margin-top: 1rem;
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
-        <section class="col-md-4" aria-labelledby="deleteBooksTitle">
-            <div class="card">
-                <h2 class="section-title" id="deleteBooksTitle">Remove Books</h2>
-                <p>Get rid of books you no longer want in your collection.</p>
-                <p><a class="btn btn-outline-dark" href="@Url.Action("Delete", "Book")">Remove Books &raquo;</a></p>
-            </div>
-        </section>
-    </div>
+            .btn:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
 
-    <footer class="footer">
-        <p>&copy; 2024 Book Collection. All rights reserved.</p>
-    </footer>
-</main>
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem 0;
+            background-color: #f1f1f1;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Book Collection</h1>
+        <div class="row">
+            <!-- Book List Section -->
+            <section class="col-md-4">
+                <h2>Book List</h2>
+                <div id="book-list">
+                    <!-- Dynamic content will be populated here -->
+                </div>
+                <button class="btn" onclick="addBook()">ADD</button>
+            </section>
+
+            <!-- Book Detail Section -->
+            <section class="col-md-4">
+                <h2>Book Detail</h2>
+                <div id="book-detail">
+                    <p>Select a book to view details.</p>
+                </div>
+            </section>
+
+            <!-- Update Book Form -->
+            <section class="col-md-4">
+                <h2>Update Book Form</h2>
+                <input type="text" id="book-title" class="form-control" placeholder="Title" aria-label="Book Title" />
+                <input type="text" id="book-author" class="form-control" placeholder="Author" aria-label="Author Name" />
+                <input type="text" id="book-year" class="form-control" placeholder="Publication Year" aria-label="Publication Year" />
+                <button class="btn" onclick="updateBook()">Update</button>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Your Book Collection</p>
+        </footer>
+    </main>
+
+    <script>
+        const books = []; 
+        let currentBookIndex = null; 
+
+        // Function to add a book
+        function addBook() {
+            const title = document.getElementById('book-title').value;
+            const author = document.getElementById('book-author').value;
+            const year = document.getElementById('book-year').value;
+
+            if (title && author && year) {
+                const book = { title, author, year };
+                books.push(book);
+                displayBooks();
+                clearForm();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Function to display books
+        function displayBooks() {
+            const bookList = document.getElementById('book-list');
+            bookList.innerHTML = ''; 
+
+            books.forEach((book, index) => {
+                const bookItem = document.createElement('div');
+                bookItem.textContent = `${book.title} by ${book.author} (${book.year})`;
+                bookItem.onclick = () => showDetails(index); 
+                bookItem.style.cursor = 'pointer';
+                bookItem.style.padding = '0.5rem';
+                bookItem.style.borderBottom = '1px solid #ccc';
+                bookList.appendChild(bookItem);
+            });
+        }
+
+        // Function to show book details
+        function showDetails(index) {
+            const book = books[index];
+            const bookDetail = document.getElementById('book-detail');
+            bookDetail.innerHTML = `<strong>Title:</strong> ${book.title}<br><strong>Author:</strong> ${book.author}<br><strong>Year:</strong> ${book.year}`;
+            currentBookIndex = index; 
+        }
+
+        // Function to clear form fields
+        function clearForm() {
+            document.getElementById('book-title').value = '';
+            document.getElementById('book-author').value = '';
+            document.getElementById('book-year').value = '';
+        }
+
+        // Function to update a book
+        function updateBook() {
+            if (currentBookIndex !== null) {
+                const title = document.getElementById('book-title').value;
+                const author = document.getElementById('book-author').value;
+                const year = document.getElementById('book-year').value;
+
+                if (title && author && year) {
+                    books[currentBookIndex] = { title, author, year }; 
+                    displayBooks(); 
+                    clearForm();
+                    currentBookIndex = null; 
+                    document.getElementById('book-detail').innerHTML = 'Select a book to view details.'; 
+                } else {
+                    alert('Please fill in all fields.');
+                }
+            } else {
+                alert('Please select a book to update.');
+            }
+        }
+    </script>
+</body>
+</html>
